@@ -12,7 +12,9 @@ A solo dev can run one command and get a clear, actionable security report that 
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] Installable Python package with src layout and hatchling build backend — Validated in Phase 1: Project Foundation
+- [x] `naz` CLI entry point registered via pyproject.toml and prints help — Validated in Phase 1: Project Foundation
+- [x] Central ProjectProfile Pydantic model can be instantiated and serialized to JSON — Validated in Phase 1: Project Foundation
 
 ### Active
 
@@ -77,4 +79,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-25 after initialization*
+*Last updated: 2026-03-25 after Phase 1 completion*
