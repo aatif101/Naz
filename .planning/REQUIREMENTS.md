@@ -28,8 +28,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Packaging
 
-- [ ] **PKG-01**: Project uses src layout with pyproject.toml, installable via `pip install`
-- [ ] **PKG-02**: `naz` CLI entry point is registered and works after install
+- [x] **PKG-01**: Project uses src layout with pyproject.toml, installable via `pip install`
+- [x] **PKG-02**: `naz` CLI entry point is registered and works after install
 
 ## v2 Requirements
 
@@ -83,8 +83,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DET-06 | Phase 2 | Pending |
 | OUT-01 | Phase 4 | Pending |
 | OUT-02 | Phase 4 | Pending |
-| PKG-01 | Phase 1 | Pending |
-| PKG-02 | Phase 1 | Pending |
+| PKG-01 | Phase 1 | Complete |
+| PKG-02 | Phase 1 | Complete |
 
 **Coverage:**
 - v1 requirements: 12 total

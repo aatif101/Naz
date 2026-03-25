@@ -30,7 +30,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. A ProjectProfile Pydantic model can be instantiated and serialized to JSON
 **Plans:** 2 plans
 Plans:
-- [ ] 01-01-PLAN.md — Package skeleton with pyproject.toml, src layout, Typer CLI entry point
+- [x] 01-01-PLAN.md — Package skeleton with pyproject.toml, src layout, Typer CLI entry point
 - [ ] 01-02-PLAN.md — Pydantic data models (ProjectProfile) and full test suite
 
 ### Phase 2: Specfy Integration
