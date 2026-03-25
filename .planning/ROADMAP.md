@@ -31,7 +31,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans:** 2 plans
 Plans:
 - [x] 01-01-PLAN.md — Package skeleton with pyproject.toml, src layout, Typer CLI entry point
-- [ ] 01-02-PLAN.md — Pydantic data models (ProjectProfile) and full test suite
+- [x] 01-02-PLAN.md — Pydantic data models (ProjectProfile) and full test suite
 
 ### Phase 2: Specfy Integration
 **Goal**: Naz can invoke Specfy via npx and get raw detection results back, handling all platform quirks and failure modes
