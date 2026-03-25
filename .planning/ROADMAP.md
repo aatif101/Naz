@@ -28,7 +28,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. Running `pip install -e .` in the repo succeeds without errors
   2. Running `naz` in a terminal prints a help message (entry point works)
   3. A ProjectProfile Pydantic model can be instantiated and serialized to JSON
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 01-01-PLAN.md — Package skeleton with pyproject.toml, src layout, Typer CLI entry point
+- [ ] 01-02-PLAN.md — Pydantic data models (ProjectProfile) and full test suite
 
 ### Phase 2: Specfy Integration
 **Goal**: Naz can invoke Specfy via npx and get raw detection results back, handling all platform quirks and failure modes
@@ -79,7 +82,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Project Foundation | 0/0 | Not started | - |
+| 1. Project Foundation | 0/2 | Planning complete | - |
 | 2. Specfy Integration | 0/0 | Not started | - |
 | 3. Normalization and AI Detection | 0/0 | Not started | - |
 | 4. Output Rendering | 0/0 | Not started | - |
