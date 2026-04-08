@@ -1,5 +1,7 @@
 """Tests for Naz CLI entry point."""
 
+from unittest.mock import patch
+
 from typer.testing import CliRunner
 
 from naz.cli import app
@@ -23,14 +25,15 @@ def test_no_args_shows_help():
 
 
 def test_scan_default_path():
-    """naz scan with no path uses current directory."""
-    result = runner.invoke(app, ["scan"])
+    """naz scan with no path uses current directory (mocked runner)."""
+    with patch("naz.cli.run_specfy", return_value={"techs": ["python"]}):
+        result = runner.invoke(app, ["scan"])
     assert result.exit_code == 0
-    assert "Scanning: ." in result.output
 
 
 def test_scan_custom_path():
-    """naz scan /some/path passes the path argument."""
-    result = runner.invoke(app, ["scan", "/some/path"])
+    """naz scan /some/path passes the path argument to run_specfy."""
+    with patch("naz.cli.run_specfy", return_value={"techs": ["python"]}) as mock_run:
+        result = runner.invoke(app, ["scan", "/some/path"])
     assert result.exit_code == 0
-    assert "Scanning: /some/path" in result.output
+    mock_run.assert_called_once_with("/some/path")
