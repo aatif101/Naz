@@ -25,15 +25,19 @@ def _write_fixture(tmpdir: str) -> MagicMock:
 
 def test_run_specfy_success(tmp_path):
     """run_specfy returns a dict with 'dependencies' key on success."""
+    scan_dir = tmp_path / "repo"
+    scan_dir.mkdir()
+    out_dir = tmp_path / "out"
+    out_dir.mkdir()
     with (
         patch("naz.detection.runner.shutil.which", return_value="/usr/bin/npx"),
         patch("naz.detection.runner.subprocess.run") as mock_run,
         patch("naz.detection.runner.tempfile.TemporaryDirectory") as mock_tmpdir,
     ):
-        mock_tmpdir.return_value.__enter__.return_value = str(tmp_path)
-        mock_run.return_value = _write_fixture(str(tmp_path))
+        mock_tmpdir.return_value.__enter__.return_value = str(out_dir)
+        mock_run.return_value = _write_fixture(str(out_dir))
 
-        result = run_specfy("/some/repo")
+        result = run_specfy(str(scan_dir))
         assert isinstance(result, dict)
         assert "dependencies" in result
 
@@ -48,6 +52,10 @@ def test_node_not_found():
 
 def test_specfy_timeout(tmp_path):
     """run_specfy raises SpecfyTimeoutError when subprocess exceeds timeout."""
+    scan_dir = tmp_path / "repo"
+    scan_dir.mkdir()
+    out_dir = tmp_path / "out"
+    out_dir.mkdir()
     with (
         patch("naz.detection.runner.shutil.which", return_value="/usr/bin/npx"),
         patch(
@@ -56,13 +64,17 @@ def test_specfy_timeout(tmp_path):
         ),
         patch("naz.detection.runner.tempfile.TemporaryDirectory") as mock_tmpdir,
     ):
-        mock_tmpdir.return_value.__enter__.return_value = str(tmp_path)
+        mock_tmpdir.return_value.__enter__.return_value = str(out_dir)
         with pytest.raises(SpecfyTimeoutError):
-            run_specfy("/some/repo")
+            run_specfy(str(scan_dir))
 
 
 def test_specfy_nonzero_exit(tmp_path):
     """run_specfy raises SpecfyError with stderr when Specfy exits non-zero."""
+    scan_dir = tmp_path / "repo"
+    scan_dir.mkdir()
+    out_dir = tmp_path / "out"
+    out_dir.mkdir()
     mock = MagicMock()
     mock.returncode = 1
     mock.stderr = "some error"
@@ -71,58 +83,70 @@ def test_specfy_nonzero_exit(tmp_path):
         patch("naz.detection.runner.subprocess.run", return_value=mock),
         patch("naz.detection.runner.tempfile.TemporaryDirectory") as mock_tmpdir,
     ):
-        mock_tmpdir.return_value.__enter__.return_value = str(tmp_path)
+        mock_tmpdir.return_value.__enter__.return_value = str(out_dir)
         with pytest.raises(SpecfyError) as exc_info:
-            run_specfy("/some/repo")
+            run_specfy(str(scan_dir))
         assert exc_info.value.stderr == "some error"
 
 
 def test_specfy_no_output_file(tmp_path):
     """run_specfy raises SpecfyError when out.json is not produced."""
+    scan_dir = tmp_path / "repo"
+    scan_dir.mkdir()
+    out_dir = tmp_path / "out"
+    out_dir.mkdir()
     mock = MagicMock()
     mock.returncode = 0
     mock.stderr = ""
-    # Do NOT write out.json into tmp_path
+    # Do NOT write out.json into out_dir
     with (
         patch("naz.detection.runner.shutil.which", return_value="/usr/bin/npx"),
         patch("naz.detection.runner.subprocess.run", return_value=mock),
         patch("naz.detection.runner.tempfile.TemporaryDirectory") as mock_tmpdir,
     ):
-        mock_tmpdir.return_value.__enter__.return_value = str(tmp_path)
+        mock_tmpdir.return_value.__enter__.return_value = str(out_dir)
         with pytest.raises(SpecfyError) as exc_info:
-            run_specfy("/some/repo")
+            run_specfy(str(scan_dir))
         assert "did not produce" in str(exc_info.value)
 
 
 def test_specfy_invalid_json(tmp_path):
     """run_specfy raises SpecfyError when out.json contains invalid JSON."""
+    scan_dir = tmp_path / "repo"
+    scan_dir.mkdir()
+    out_dir = tmp_path / "out"
+    out_dir.mkdir()
     mock = MagicMock()
     mock.returncode = 0
     mock.stderr = ""
-    (tmp_path / "out.json").write_text("not json", encoding="utf-8")
+    (out_dir / "out.json").write_text("not json", encoding="utf-8")
     with (
         patch("naz.detection.runner.shutil.which", return_value="/usr/bin/npx"),
         patch("naz.detection.runner.subprocess.run", return_value=mock),
         patch("naz.detection.runner.tempfile.TemporaryDirectory") as mock_tmpdir,
     ):
-        mock_tmpdir.return_value.__enter__.return_value = str(tmp_path)
+        mock_tmpdir.return_value.__enter__.return_value = str(out_dir)
         with pytest.raises(SpecfyError) as exc_info:
-            run_specfy("/some/repo")
+            run_specfy(str(scan_dir))
         assert "not valid JSON" in str(exc_info.value)
 
 
 def test_npx_cmd_passed_to_subprocess(tmp_path):
     """subprocess.run is called with the shutil.which result as first arg."""
+    scan_dir = tmp_path / "repo"
+    scan_dir.mkdir()
+    out_dir = tmp_path / "out"
+    out_dir.mkdir()
     resolved_npx = r"C:\Program Files\nodejs\npx.CMD"
     with (
         patch("naz.detection.runner.shutil.which", return_value=resolved_npx),
         patch("naz.detection.runner.subprocess.run") as mock_run,
         patch("naz.detection.runner.tempfile.TemporaryDirectory") as mock_tmpdir,
     ):
-        mock_tmpdir.return_value.__enter__.return_value = str(tmp_path)
-        mock_run.return_value = _write_fixture(str(tmp_path))
+        mock_tmpdir.return_value.__enter__.return_value = str(out_dir)
+        mock_run.return_value = _write_fixture(str(out_dir))
 
-        run_specfy("/some/repo")
+        run_specfy(str(scan_dir))
         call_args = mock_run.call_args[0][0]
         assert call_args[0] == resolved_npx
 
