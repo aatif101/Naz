@@ -13,7 +13,7 @@ Naz v0.1 delivers one thing: run `naz scan .` and get a complete technology prof
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: Project Foundation** - Installable package skeleton with Pydantic data models
-- [ ] **Phase 2: Specfy Integration** - Subprocess runner that invokes Specfy safely on all platforms
+- [x] **Phase 2: Specfy Integration** - Subprocess runner that invokes Specfy safely on all platforms
 - [ ] **Phase 3: Normalization and AI Detection** - Transform raw Specfy output into a structured, categorized project profile
 - [ ] **Phase 4: Output Rendering** - Rich terminal summary and machine-readable JSON output
 - [ ] **Phase 5: CLI Wiring and End-to-End** - Working `naz scan .` command tying all components together
@@ -42,7 +42,9 @@ Plans:
   2. Running the Specfy runner on Windows resolves npx.cmd correctly and produces the same results as Unix
   3. Running the Specfy runner without Node.js installed produces a clear error message with install instructions
   4. The subprocess never hangs (npx --yes flag, timeout enforced)
-**Plans**: TBD
+**Plans**:
+- [x] 02-01-PLAN.md — Specfy subprocess runner with typed exceptions and tests
+- [x] 02-02-PLAN.md — Scan CLI wired to runner with Rich error panels
 
 ### Phase 3: Normalization and AI Detection
 **Goal**: Raw Specfy output is transformed into a complete, categorized ProjectProfile with AI/LLM dependencies specifically identified
@@ -82,8 +84,8 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Project Foundation | 0/2 | Planning complete | - |
-| 2. Specfy Integration | 0/0 | Not started | - |
+| 1. Project Foundation | 2/2 | Complete | 2026-04-08 |
+| 2. Specfy Integration | 2/2 | Complete | 2026-04-08 |
 | 3. Normalization and AI Detection | 0/0 | Not started | - |
 | 4. Output Rendering | 0/0 | Not started | - |
 | 5. CLI Wiring and End-to-End | 0/0 | Not started | - |
