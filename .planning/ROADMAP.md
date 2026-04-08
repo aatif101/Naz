@@ -42,10 +42,7 @@ Plans:
   2. Running the Specfy runner on Windows resolves npx.cmd correctly and produces the same results as Unix
   3. Running the Specfy runner without Node.js installed produces a clear error message with install instructions
   4. The subprocess never hangs (npx --yes flag, timeout enforced)
-**Plans:** 2 plans
-Plans:
-- [ ] 02-01-PLAN.md — Exception classes, Specfy subprocess runner, and unit tests
-- [ ] 02-02-PLAN.md — CLI scan command wiring with Rich error panels and integration tests
+**Plans**: TBD
 
 ### Phase 3: Normalization and AI Detection
 **Goal**: Raw Specfy output is transformed into a complete, categorized ProjectProfile with AI/LLM dependencies specifically identified
@@ -86,7 +83,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Project Foundation | 0/2 | Planning complete | - |
-| 2. Specfy Integration | 0/2 | Planning complete | - |
+| 2. Specfy Integration | 0/0 | Not started | - |
 | 3. Normalization and AI Detection | 0/0 | Not started | - |
 | 4. Output Rendering | 0/0 | Not started | - |
 | 5. CLI Wiring and End-to-End | 0/0 | Not started | - |
