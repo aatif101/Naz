@@ -499,7 +499,7 @@ The `--flat` flag collapses the component tree. The output schema for `out.json`
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Should the `print()` call in runner.py use `typer.echo()` or stdlib `print()`?**
    - What we know: D-09 says detection layer never imports Rich. Typer is not Rich.
