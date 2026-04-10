@@ -1,0 +1,17 @@
+{
+  "id": "ai-fixture",
+  "name": "flatten",
+  "path": ["/", "my-ai-app"],
+  "tech": null,
+  "edges": [],
+  "inComponent": null,
+  "childs": [],
+  "techs": ["python", "fastapi"],
+  "languages": {"Python": 500},
+  "licenses": [],
+  "dependencies": [
+    ["python", "openai", "1.30.0"],
+    ["python", "typer", "0.24.0"]
+  ],
+  "reason": ["matched extension: .py"]
+}
