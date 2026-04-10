@@ -68,7 +68,10 @@ Plans:
   1. A Rich-formatted terminal summary displays the detected stack, dependency counts, infrastructure, services, and AI/LLM components
   2. A JSON output of the complete ProjectProfile can be produced for machine consumption
   3. Output renders correctly when piped or in non-terminal contexts (no Rich markup in plain text)
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 04-01-PLAN.md — renderer.py with Rich panels (Languages, Technologies, Dependencies, AI/LLM) + test scaffold
+- [ ] 04-02-PLAN.md — Wire cli.py with --json flag; update test_cli_scan.py success and JSON tests
 
 ### Phase 5: CLI Wiring and End-to-End
 **Goal**: A user can run `naz scan .` and get a complete scan result -- the full pipeline works end-to-end
@@ -90,5 +93,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | 1. Project Foundation | 2/2 | Complete | 2026-04-08 |
 | 2. Specfy Integration | 2/2 | Complete | 2026-04-08 |
 | 3. Normalization and AI Detection | 0/2 | Not started | - |
-| 4. Output Rendering | 0/0 | Not started | - |
+| 4. Output Rendering | 0/2 | Not started | - |
 | 5. CLI Wiring and End-to-End | 0/0 | Not started | - |
