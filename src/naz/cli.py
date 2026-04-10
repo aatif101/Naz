@@ -10,6 +10,8 @@ from naz.detection import (
     SpecfyTimeoutError,
     run_specfy,
 )
+from naz.detection.normalizer import normalize
+from naz.renderer import render
 
 app = typer.Typer(
     name="naz",
@@ -23,6 +25,7 @@ console = Console(stderr=True)
 @app.command()
 def scan(
     path: str = typer.Argument(".", help="Path to the repository to scan"),
+    json: bool = typer.Option(False, "--json", help="Output machine-readable JSON"),
 ) -> None:
     """Scan a repository and detect its technology stack."""
     try:
@@ -53,8 +56,12 @@ def scan(
         ))
         raise typer.Exit(code=1)
 
-    # Phase 3 will replace this with ProjectProfile conversion
-    typer.echo(raw)
+    profile = normalize(raw)
+
+    if json:
+        print(profile.model_dump_json(indent=2))
+    else:
+        render(profile)
 
 
 @app.command()
