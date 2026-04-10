@@ -6,6 +6,7 @@ from naz.detection.exceptions import (
     SpecfyError,
     SpecfyTimeoutError,
 )
+from naz.detection.normalizer import normalize
 from naz.detection.runner import run_specfy
 
 __all__ = [
@@ -13,5 +14,6 @@ __all__ = [
     "NodeNotFoundError",
     "SpecfyError",
     "SpecfyTimeoutError",
+    "normalize",
     "run_specfy",
 ]
