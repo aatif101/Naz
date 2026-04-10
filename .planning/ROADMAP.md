@@ -57,8 +57,8 @@ Plans:
   4. The ProjectProfile validates successfully via Pydantic (no malformed data passes through)
 **Plans:** 2 plans
 Plans:
-- [ ] 03-01-PLAN.md — Normalizer module (normalizer.py + __init__ re-export)
-- [ ] 03-02-PLAN.md — Normalizer test suite covering all DET requirements
+- [x] 03-01-PLAN.md — Normalizer module (normalizer.py + __init__ re-export)
+- [x] 03-02-PLAN.md — Normalizer test suite covering all DET requirements
 
 ### Phase 4: Output Rendering
 **Goal**: Users see a clear, formatted terminal summary of their project's technology stack, and can get machine-readable JSON
