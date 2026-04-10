@@ -1,5 +1,7 @@
 """Integration tests for naz scan command error paths and success."""
 
+import json
+from pathlib import Path
 from unittest.mock import patch
 
 import pytest
@@ -9,6 +11,9 @@ from naz.cli import app
 from naz.detection import NodeNotFoundError, SpecfyError, SpecfyTimeoutError
 
 runner = CliRunner()
+
+FIXTURES = Path(__file__).parent / "fixtures"
+FLAT = json.loads((FIXTURES / "specfy_flat.json").read_text())
 
 
 def test_scan_node_not_found():
@@ -70,12 +75,50 @@ def test_scan_specfy_error_no_stderr():
 
 
 def test_scan_success():
-    """naz scan prints raw result dict on success."""
-    with patch(
-        "naz.cli.run_specfy",
-        return_value={"techs": ["python"], "dependencies": []},
-    ):
+    """naz scan renders Rich panels to stdout on success."""
+    with patch("naz.cli.run_specfy", return_value=FLAT):
         result = runner.invoke(app, ["scan", "."])
 
     assert result.exit_code == 0
-    assert "python" in result.output
+    assert "Languages" in result.output
+    assert "Technologies" in result.output
+    assert "Dependencies" in result.output
+
+
+def test_scan_json_flag_produces_valid_json():
+    """naz scan --json outputs parseable JSON to stdout."""
+    with patch("naz.cli.run_specfy", return_value=FLAT):
+        result = runner.invoke(app, ["scan", ".", "--json"])
+
+    assert result.exit_code == 0
+    data = json.loads(result.output)  # raises if invalid JSON
+    assert isinstance(data, dict)
+
+
+def test_scan_json_excludes_raw_field():
+    """naz scan --json does not include the internal raw field."""
+    with patch("naz.cli.run_specfy", return_value=FLAT):
+        result = runner.invoke(app, ["scan", ".", "--json"])
+
+    data = json.loads(result.output)
+    assert "raw" not in data
+
+
+def test_scan_json_contains_technologies():
+    """naz scan --json output contains technologies key."""
+    with patch("naz.cli.run_specfy", return_value=FLAT):
+        result = runner.invoke(app, ["scan", ".", "--json"])
+
+    data = json.loads(result.output)
+    assert "technologies" in data
+
+
+def test_scan_json_no_rich_panels():
+    """naz scan --json suppresses Rich terminal output entirely."""
+    with patch("naz.cli.run_specfy", return_value=FLAT):
+        result = runner.invoke(app, ["scan", ".", "--json"])
+
+    assert result.exit_code == 0
+    # Rich panel titles must not appear in stdout when --json is active
+    assert "Languages" not in result.output
+    assert "Technologies" not in result.output
