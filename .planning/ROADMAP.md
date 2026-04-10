@@ -55,10 +55,7 @@ Plans:
   2. AI/LLM packages (openai, langchain, anthropic, etc.) are flagged as AI dependencies in the profile
   3. Detected technologies are grouped into categories: runtime deps, dev tools, infrastructure, services, AI/ML
   4. The ProjectProfile validates successfully via Pydantic (no malformed data passes through)
-**Plans:** 2 plans
-Plans:
-- [ ] 03-01-PLAN.md — Normalizer module (normalizer.py + __init__ re-export)
-- [ ] 03-02-PLAN.md — Normalizer test suite covering all DET requirements
+**Plans**: TBD
 
 ### Phase 4: Output Rendering
 **Goal**: Users see a clear, formatted terminal summary of their project's technology stack, and can get machine-readable JSON
@@ -89,6 +86,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 |-------|----------------|--------|-----------|
 | 1. Project Foundation | 2/2 | Complete | 2026-04-08 |
 | 2. Specfy Integration | 2/2 | Complete | 2026-04-08 |
-| 3. Normalization and AI Detection | 0/2 | Not started | - |
+| 3. Normalization and AI Detection | 0/0 | Not started | - |
 | 4. Output Rendering | 0/0 | Not started | - |
 | 5. CLI Wiring and End-to-End | 0/0 | Not started | - |
